@@ -3,7 +3,6 @@ package by.lexer;
 import java.util.ArrayList;
 
 public class Parser {
-	//test
 	private ArrayList<Token> tokens;
 	private ArrayList<ArgumentToken> args;
 	private int currentIndex = 0;
