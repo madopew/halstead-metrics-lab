@@ -10,7 +10,7 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 		StringBuilder sb = new StringBuilder("");
 		int amount = 0;
-		try(BufferedReader br = new BufferedReader(new FileReader(new File("C:\\Users\\Madi\\Desktop\\lexer\\" + scanner.nextLine() + ".kt")))) {
+		try(BufferedReader br = new BufferedReader(new FileReader(new File("./res/" + scanner.nextLine() + ".kt")))) {
 			String currentLine = "";
 			while((currentLine = br.readLine()) != null) {
 				sb.append(currentLine).append('\n');
