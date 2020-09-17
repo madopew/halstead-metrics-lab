@@ -5,3 +5,4 @@ Halstead-metrics.iml
 .project
 .settings/
 bin/
+out/
