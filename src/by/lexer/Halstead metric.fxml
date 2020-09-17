@@ -11,9 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="728.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.lexer.Controller">
+<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="711.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.lexer.Controller">
   <children>
-    <MenuBar prefWidth="750.0" VBox.vgrow="NEVER">
+    <MenuBar minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
@@ -30,7 +30,7 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="750.0" prefWidth="735.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="927.0" VBox.vgrow="ALWAYS">
          <children>
             <Text fx:id="dictionaryStr" layoutX="31.0" layoutY="638.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program dictionary n = " wrappingWidth="244.89959716796875">
                <font>
