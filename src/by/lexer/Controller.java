@@ -35,6 +35,18 @@ public class Controller implements Initializable {
     private Text dictionaryStr;
 
     @FXML
+    private Text n1;
+
+    @FXML
+    private Text n2;
+
+    @FXML
+    private Text nu1;
+
+    @FXML
+    private Text nu2;
+
+    @FXML
     private Text lengthString;
 
     @FXML
@@ -79,12 +91,12 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void exitAction(ActionEvent event) {
+    private void exitAction(ActionEvent event) {
         System.exit(0);
     }
 
     @FXML
-    void aboutDevelopers(ActionEvent event) {
+    private void aboutDevelopers(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About developers");
         alert.setContentText("This program was developed by Bakyt Madi and Maiski Vlad, group 951007");
@@ -93,7 +105,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void aboutProgram(ActionEvent event) {
+    private void aboutProgram(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About program");
         alert.setContentText("This program shows halstead metrics for a program written in Kotlin");
@@ -102,8 +114,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void openFile(ActionEvent event) {
-
+    private void openFile(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(Main.getStage());
         if (file != null && file.getAbsolutePath().matches("^.+.kt$")) {
@@ -117,12 +128,16 @@ public class Controller implements Initializable {
                     s = br.readLine();
                 }
             } catch (Exception e) {
-
+                System.err.println("File error");
             }
             Lexer l = new Lexer(sb.toString());
             Parser p = new Parser(l.getTokens());
             Metric m = new Metric(p.getArgTokens());
             System.out.println(l.toString());
+            getN1().setText(Integer.toString(m.getN1()));
+            getN2().setText(Integer.toString(m.getN2()));
+            getNu1().setText(Integer.toString(m.getNu1()));
+            getNu2().setText(Integer.toString(m.getNu2()));
             getDictionaryStr().setText(DICT + m.getNu());
             getLengthString().setText(LENGTH + m.getN());
             getScopeString().setText(VOLUME + m.getV());
@@ -163,7 +178,7 @@ public class Controller implements Initializable {
         return dictionaryStr;
     }
 
-    public Text getLengthString() {
+    public Text getLengthString()  {
         return lengthString;
     }
 
@@ -171,10 +186,24 @@ public class Controller implements Initializable {
         return scopeString;
     }
 
+    public Text getN1() {
+        return n1;
+    }
+
+    public Text getN2() {
+        return n2;
+    }
+
+    public Text getNu1() {
+        return nu1;
+    }
+
+    public Text getNu2() {
+        return nu2;
+    }
+
     public void fillTables() {
         tableOperator.setItems(dataOperator);
         tableOperand.setItems(dataOperand);
     }
-
-
 }
