@@ -65,7 +65,7 @@ fun main(){
                 player.moveRight(nivel,mapPlayer)
             }
 
-            else -> println("MOVIMIENTO INVALIDO!!")
+            else -> {println("MOVIMIENTO INVALIDO!!")}
         }
 
         // Evaluamos la colisión del jugador con los enemígos
