@@ -35,16 +35,16 @@ public class Controller implements Initializable {
     private Text dictionaryStr;
 
     @FXML
-    private Text n1;
+    private Text n1Value;
 
     @FXML
-    private Text n2;
+    private Text n2Value;
 
     @FXML
-    private Text nu1;
+    private Text nu1Value;
 
     @FXML
-    private Text nu2;
+    private Text nu2Value;
 
     @FXML
     private Text lengthString;
@@ -116,6 +116,7 @@ public class Controller implements Initializable {
     @FXML
     private void openFile(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("."));
         File file = fileChooser.showOpenDialog(Main.getStage());
         if (file != null && file.getAbsolutePath().matches("^.+.kt$")) {
             dataOperand.clear();
@@ -187,19 +188,19 @@ public class Controller implements Initializable {
     }
 
     public Text getN1() {
-        return n1;
+        return n1Value;
     }
 
     public Text getN2() {
-        return n2;
+        return n2Value;
     }
 
     public Text getNu1() {
-        return nu1;
+        return nu1Value;
     }
 
     public Text getNu2() {
-        return nu2;
+        return nu2Value;
     }
 
     public void fillTables() {
