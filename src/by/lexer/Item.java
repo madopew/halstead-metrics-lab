@@ -24,7 +24,7 @@ public class Item {
     }
 
     public void setItem(String item) {
-        this.name = name;
+        this.name = item;
     }
 
     public void setId(int id) {
