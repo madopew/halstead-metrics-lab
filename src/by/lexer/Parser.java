@@ -64,27 +64,80 @@ public class Parser {
 	}
 	
 	private void readHKW() {
-		if(tokens.get(currentIndex).value.equals("true") || tokens.get(currentIndex).value.equals("false") || tokens.get(currentIndex).value.equals("null")) {
+		String value = tokens.get(currentIndex).value;
+		if(value.equals("true") || value.equals("false") || value.equals("null")) {
 			args.add(new ArgumentToken(Op.OPERAND, tokens.get(currentIndex).value));
 			return;
 		}
-		if(tokens.get(currentIndex).value.equals("do")) {
-			int amount = 1;
-			int temp = currentIndex;
-			temp += 2;
-			while(amount != 0) {
-				if(tokens.get(temp).value.equals("{"))
-					amount++;
-				else if(tokens.get(temp).value.equals("}"))
-					amount--;
-				temp++;
-			}
-			tokens.remove(temp);
-			tokens.remove(temp);
-			args.add(new ArgumentToken(Op.OPERAND, "do..while()"));
+		if(value.equals("do")) {
+			readDo();
+			return;
+		}
+		if(value.equals("if")) {
+			boolean isReturn = readIf(); 
+			if(isReturn)
+				return;
+		}
+		if(value.equals("else")) {
+			readElse();
 			return;
 		}
 		args.add(new ArgumentToken(Op.OPERATOR, tokens.get(currentIndex).value));
+	}
+	
+	private void readDo() {
+		int amount = 1;
+		int temp = currentIndex;
+		temp += 2;
+		while(amount != 0) {
+			if(tokens.get(temp).value.equals("{"))
+				amount++;
+			else if(tokens.get(temp).value.equals("}"))
+				amount--;
+			temp++;
+		}
+		tokens.remove(temp);
+		tokens.remove(temp);
+		args.add(new ArgumentToken(Op.OPERATOR, "do..while()"));
+	}
+	
+	private boolean readIf() {
+		int temp = currentIndex + 2;
+		while(!tokens.get(temp).value.equals(")"))
+			temp++;
+		temp++;
+		
+		boolean isReturn = false;
+		if(tokens.get(temp).value.equals("{"))
+			 isReturn = readIfElse(temp);
+		return isReturn;
+	}
+	
+	private boolean readIfElse(int index) {
+		int temp = index+1;
+		int amount = 1;
+		while(amount != 0) {
+			if(tokens.get(temp).value.equals("{"))
+				amount++;
+			else if(tokens.get(temp).value.equals("}"))
+				amount--;
+			temp++;
+		}
+		
+		if(tokens.get(temp).value.equals("else")) {
+			tokens.remove(temp);
+			args.add(new ArgumentToken(Op.OPERATOR, "if()..else"));
+			currentIndex++;
+			return true;
+		}
+		return false;
+	}
+	
+	private void readElse() {
+		int temp = args.size() - 1;
+		while(!args.get(temp).value.equals("if()"))
+			temp--;
+		args.get(temp).value += "..else";
 	}
 	
 	private void readSKW() {
