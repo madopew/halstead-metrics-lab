@@ -24,4 +24,7 @@ fun main() {
     }
     else 
         println(index)
+
+    if(x === 7)
+        println(7);
 }

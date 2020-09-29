@@ -134,10 +134,14 @@ public class Parser {
 	}
 	
 	private void readElse() {
-		int temp = args.size() - 1;
-		while(!args.get(temp).value.equals("if()"))
-			temp--;
-		args.get(temp).value += "..else";
+		if(tokens.get(currentIndex + 1).value.equals("->")) {
+			args.add(new ArgumentToken(Op.OPERATOR, "else"));
+		} else {
+			int temp = args.size() - 1;
+			while(!args.get(temp).value.equals("if()"))
+				temp--;
+			args.get(temp).value += "..else";
+		}
 	}
 	
 	private void readSKW() {
