@@ -1,399 +1,218 @@
-fun main(){
+fun MyCompare(a : Int, b : Int) : Int {
+     var k : Int
+     return a
+     if (a < b) {
+          return b
+	}
+}
 
-    var nivel = 5
-    var impacto = 0
-    var avanza = 0
-    var numEnemy: Int
+fun MyAbs(a : Double) : Double {
+    if (a < 0) 
+    	return -a
+    else
+    	return a
+}
 
-    // Clases
-    val enemy = Enemy()
-    val player = Player(10,1000)
-    val map1 = Map(10,10) // Mapa del jugador
-    val map2 = Map(10,10) // Mapa del enemigo
+fun FunSign(a : Double) : Int {
+    if (a > 0) 
+	return 1
+    else
+	return -1  
+}
 
-    var mapPlayer = map1.createMap(nivel) // el mapa del jugador esta encima del mapa de los enemigos
-    var mapEnemy = map2.createMap(nivel)
 
+fun MyBestFunc(a : Double) : Double {
+    val eps : Double = 0.00001
+    var x : Double
+    var y : Double
+    var det : Double
+    var n : Int = 3
+    x = a
+    y = a
+    det = a
     do {
-        numEnemy = enemy.randomEnemy(nivel,mapEnemy) // Se crean los enemigos aleatorios en mapEnemy
-    }while (numEnemy<nivel-2)
+	det = -det * x * x / ((n + 1)*n)
+	n++
+	y += det
+    } while (MyAbs(det) > eps)
+    return y	
+}
 
-    mapPlayer[0][0] = "[x]" // Jugador representado con "x"
-
+fun MyBestSin(a : Double) : Double {
+	val eps : Double = 0.00001
+    var x : Double
+    var y : Double
+    var vs : Double
+    var n : Int = 2
+    x = a
+    y = x
+    vs = x
     do {
-        mapPlayer[nivel-1][nivel-1] = "[!]" // Ultima posicion en el mapa, representa la meta.
+        vs = - vs * x * x / ((2 * n - 1)*(2 * n - 2))
+        n++
+        y += vs
+    } while (MyAbs(vs) > eps)
+    return y % (2 * 3.1415926)
+}
 
-        println("NIVEL: ${nivel-4}")
-        println("VIDAS: ${player.vidas}")
-        println("PUNTAJE: ${player.puntaje}")
-
-        // Dibujamos el mapa del jugador
-        for (x in 0..nivel){
-            for (y in 0..nivel){
-                print(mapPlayer[x][y])
-            }
-            println()
-        }
-
-        println("8 -> Arriba")
-        println("2 -> Abajo")
-        println("4 -> Izquierda")
-        println("6 -> Derecha")
-
-        val opcion = readLine()?.toInt() // Pedimos el ingreso de un numero al usuario
-
-        // Segun la opción, asignamos un metodo de movimiento
-        when(opcion){
-
-            8-> {mapPlayer = map1.createMap(nivel) // creamos el mapa nuevamente y movemos al jugador
-
-                player.moveUp(mapPlayer)
-            }
-
-            2->{mapPlayer = map1.createMap(nivel)
-
-                player.moveDown(nivel,mapPlayer)
-            }
-
-            4-> {mapPlayer = map1.createMap(nivel)
-
-                player.moveLeft(mapPlayer)
-            }
-
-            6->{mapPlayer = map1.createMap(nivel)
-
-                player.moveRight(nivel,mapPlayer)
-            }
-
-            else -> {println("MOVIMIENTO INVALIDO!!")}
-        }
-
-        // Evaluamos la colisión del jugador con los enemígos
-        for (y in 0..nivel){
-            for (x in 0..nivel){
-                if (mapPlayer[y][x].equals("[x]") && mapEnemy[y][x].equals("[0]")){
-                    println("IMPACTO, pierdes una vida")
-                    player.vidas -= 1
-                    player.puntaje -= 100
-                    impacto += 1
-                }
-            }
-        }
-
-        // evaluamos si el jugador llega a la meta
-        if (mapPlayer[nivel-1][nivel-1] == "[x]"){
-            nivel +=1
-            player.puntaje +=100
-            avanza +=1
-        }
-
-        // si llega a la meta y avanza de nivel se crea el siguiente escenario y se reinician los parametros
-        if (avanza == 1){
-            enemy.numEnemys = 0
-            mapPlayer = map1.createMap(nivel)
-            mapEnemy = map2.createMap(nivel)
-
-            mapPlayer[0][0] = "[x]"
-            player.posY = 0
-            player.posX = 0
-
-            avanza -=1
-
-            do {
-                numEnemy = enemy.randomEnemy(nivel,mapEnemy)
-            }while (numEnemy<nivel-2)
-        }
-
-        // Si hay colisión se reinicia la posición del jugador y se crean nuevamente enemígos aleatorios
-        if (impacto == 1){
-            enemy.numEnemys = 0
-
-            mapPlayer = map1.createMap(nivel)
-            mapEnemy = map2.createMap(nivel)
-
-            do {
-                numEnemy = enemy.randomEnemy(nivel,mapEnemy)
-            }while (numEnemy<nivel-2)
-
-            mapPlayer[0][0] = "[x]"
-            player.posY = 0
-            player.posX = 0
-
-            impacto -=1
-
-        }
-
-        if (nivel > 9){
-            println("ERES GENIAL, PASASTE TODOS LOS NIVELES!!!")
-            System.exit(0)
-        }
-
-    }while (player.vidas>0)
-
-    println("Te quedaste sin vidas...FIN DEL JUEGO!!")
-
-    var nivel = 5
-    var impacto = 0
-    var avanza = 0
-    var numEnemy: Int
-
-    // Clases
-    val enemy = Enemy()
-    val player = Player(10,1000)
-    val map1 = Map(10,10) // Mapa del jugador
-    val map2 = Map(10,10) // Mapa del enemigo
-
-    var mapPlayer = map1.createMap(nivel) // el mapa del jugador esta encima del mapa de los enemigos
-    var mapEnemy = map2.createMap(nivel)
-
+fun MyBestCos(a : Double) : Double {
+	val eps : Double = 0.00001
+    var x : Double
+    var y : Double
+    var vs : Double
+    var n : Int = 2
+    x = a
+    y = 1.0
+    vs = 1.0
     do {
-        numEnemy = enemy.randomEnemy(nivel,mapEnemy) // Se crean los enemigos aleatorios en mapEnemy
-    }while (numEnemy<nivel-2)
+        vs = - vs * x * x / ((n - 1)*(n))
+        n += 2
+        y += vs
+    } while (MyAbs(vs) > eps)
+    return y % (2 * 3.1415926)
+}
 
-    mapPlayer[0][0] = "[x]" // Jugador representado con "x"
-
+fun MyBestExp(a : Double) : Double {
+    val eps : Double = 0.00001
+    var x : Double
+    var y : Double
+    var det : Double
+    var n : Int = 1
+    x = a
+    y = 1.0
+    det = 1.0
     do {
-        mapPlayer[nivel-1][nivel-1] = "[!]" // Ultima posicion en el mapa, representa la meta.
+        det = det * x / n
+        n++
+        y += det
+    } while (MyAbs(det) > eps)
+    return y
+}
 
-        println("NIVEL: ${nivel-4}")
-        println("VIDAS: ${player.vidas}")
-        println("PUNTAJE: ${player.puntaje}")
-
-        // Dibujamos el mapa del jugador
-        for (x in 0..nivel){
-            for (y in 0..nivel){
-                print(mapPlayer[x][y])
-            }
-            println()
-        }
-
-        println("8 -> Arriba")
-        println("2 -> Abajo")
-        println("4 -> Izquierda")
-        println("6 -> Derecha")
-
-        val opcion = readLine()?.toInt() // Pedimos el ingreso de un numero al usuario
-
-        // Segun la opción, asignamos un metodo de movimiento
-        when(opcion){
-
-            8-> {mapPlayer = map1.createMap(nivel) // creamos el mapa nuevamente y movemos al jugador
-
-                player.moveUp(mapPlayer)
-            }
-
-            2->{mapPlayer = map1.createMap(nivel)
-
-                player.moveDown(nivel,mapPlayer)
-            }
-
-            4-> {mapPlayer = map1.createMap(nivel)
-
-                player.moveLeft(mapPlayer)
-            }
-
-            6->{mapPlayer = map1.createMap(nivel)
-
-                player.moveRight(nivel,mapPlayer)
-            }
-
-            else -> println("MOVIMIENTO INVALIDO!!")
-        }
-
-        // Evaluamos la colisión del jugador con los enemígos
-        for (y in 0..nivel){
-            for (x in 0..nivel){
-                if (mapPlayer[y][x].equals("[x]") && mapEnemy[y][x].equals("[0]")){
-                    println("IMPACTO, pierdes una vida")
-                    player.vidas -= 1
-                    player.puntaje -= 100
-                    impacto += 1
-                }
-            }
-        }
-
-        // evaluamos si el jugador llega a la meta
-        if (mapPlayer[nivel-1][nivel-1] == "[x]"){
-            nivel +=1
-            player.puntaje +=100
-            avanza +=1
-        }
-
-        // si llega a la meta y avanza de nivel se crea el siguiente escenario y se reinician los parametros
-        if (avanza == 1){
-            enemy.numEnemys = 0
-            mapPlayer = map1.createMap(nivel)
-            mapEnemy = map2.createMap(nivel)
-
-            mapPlayer[0][0] = "[x]"
-            player.posY = 0
-            player.posX = 0
-
-            avanza -=1
-
-            do {
-                numEnemy = enemy.randomEnemy(nivel,mapEnemy)
-            }while (numEnemy<nivel-2)
-        }
-
-        // Si hay colisión se reinicia la posición del jugador y se crean nuevamente enemígos aleatorios
-        if (impacto == 1){
-            enemy.numEnemys = 0
-
-            mapPlayer = map1.createMap(nivel)
-            mapEnemy = map2.createMap(nivel)
-
-            do {
-                numEnemy = enemy.randomEnemy(nivel,mapEnemy)
-            }while (numEnemy<nivel-2)
-
-            mapPlayer[0][0] = "[x]"
-            player.posY = 0
-            player.posX = 0
-
-            impacto -=1
-
-        }
-
-        if (nivel > 9){
-            println("ERES GENIAL, PASASTE TODOS LOS NIVELES!!!")
-            System.exit(0)
-        }
-
-    }while (player.vidas>0)
-
-    println("Te quedaste sin vidas...FIN DEL JUEGO!!")
-
-    var nivel = 5
-    var impacto = 0
-    var avanza = 0
-    var numEnemy: Int
-
-    // Clases
-    val enemy = Enemy()
-    val player = Player(10,1000)
-    val map1 = Map(10,10) // Mapa del jugador
-    val map2 = Map(10,10) // Mapa del enemigo
-
-    var mapPlayer = map1.createMap(nivel) // el mapa del jugador esta encima del mapa de los enemigos
-    var mapEnemy = map2.createMap(nivel)
-
+fun MyBestIDKWhat(a : Double) : Double {
+    val eps : Double = 0.00001
+    var x : Double
+    var y : Double
+    var det : Double
+    var n : Int = 3
+    x = a
+    y = a
+    det = a
     do {
-        numEnemy = enemy.randomEnemy(nivel,mapEnemy) // Se crean los enemigos aleatorios en mapEnemy
-    }while (numEnemy<nivel-2)
+	det = -det * x * x / ((n + 1)*n)
+	n++
+	y += det
+    } while (MyAbs(det) > eps
+    return y	
+}
 
-    mapPlayer[0][0] = "[x]" // Jugador representado con "x"
+fun MyCompare(a : Int, b : Int) : Int {
+     var k : Int
+     return a
+     if (a < b) {
+          return b
+	}
+}
 
+fun MyAbs(a : Double) : Double {
+    if (a < 0) 
+    	return -a
+    else
+    	return a
+}
+
+fun MyBestSin(a : Double) : Double {
+	val eps : Double = 0.00001
+    var x : Double
+    var y : Double
+    var vs : Double
+    var n : Int = 2
+    x = a
+    y = x
+    vs = x
     do {
-        mapPlayer[nivel-1][nivel-1] = "[!]" // Ultima posicion en el mapa, representa la meta.
+        vs = - vs * x * x / ((2 * n - 1)*(2 * n - 2))
+        n++
+        y += vs
+    } while (MyAbs(vs) > eps)
+    return y % (2 * 3.1415926)
+}
 
-        println("NIVEL: ${nivel-4}")
-        println("VIDAS: ${player.vidas}")
-        println("PUNTAJE: ${player.puntaje}")
+fun MyBestCos(a : Double) : Double {
+	val eps : Double = 0.00001
+    var x : Double
+    var y : Double
+    var vs : Double
+    var n : Int = 2
+    x = a
+    y = 1.0
+    vs = 1.0
+    do {
+        vs = - vs * x * x / ((n - 1)*(n))
+        n += 2
+        y += vs
+    } while (MyAbs(vs) > eps)
+    return y % (2 * 3.1415926)
+}
 
-        // Dibujamos el mapa del jugador
-        for (x in 0..nivel){
-            for (y in 0..nivel){
-                print(mapPlayer[x][y])
-            }
-            println()
-        }
+fun MyBestExp(a : Double) : Double {
+    val eps : Double = 0.00001
+    var x : Double
+    var y : Double
+    var det : Double
+    var n : Int = 1
+    x = a
+    y = 1.0
+    det = 1.0
+    do {
+        det = det * x / n
+        n++
+        y += det
+    } while (MyAbs(det) > eps)
+    return y
+}
 
-        println("8 -> Arriba")
-        println("2 -> Abajo")
-        println("4 -> Izquierda")
-        println("6 -> Derecha")
+fun MyBestFunc(a : Double) : Double {
+    val eps : Double = 0.00001
+    var x : Double
+    var y : Double
+    var det : Double
+    var n : Int = 3
+    x = a
+    y = a
+    det = a
+    do {
+	det = -det * x * x / ((n + 1)*n)
+	n++
+	y += det
+    } while (MyAbs(det) > eps)
+    return y	
+}
 
-        val opcion = readLine()?.toInt() // Pedimos el ingreso de un numero al usuario
+fun FunSign(a : Double) : Int {
+    if (a > 0) 
+	return 1
+    else
+	return -1  
+}
 
-        // Segun la opción, asignamos un metodo de movimiento
-        when(opcion){
+fun Revers(a : Double) : Double {
+    var y : Double
+    val g : Double = 2.3
+    val pii : Double = 3.14
+    var det : Double
+    var n : Int = 1
+    y = 1
+    det = 1
+    do {
+	det = det / x
+        n++
+	y+= det
+    } while (MyAbs(det) > eps)
+    return y
+}
 
-            8-> {mapPlayer = map1.createMap(nivel) // creamos el mapa nuevamente y movemos al jugador
-
-                player.moveUp(mapPlayer)
-            }
-
-            2->{mapPlayer = map1.createMap(nivel)
-
-                player.moveDown(nivel,mapPlayer)
-            }
-
-            4-> {mapPlayer = map1.createMap(nivel)
-
-                player.moveLeft(mapPlayer)
-            }
-
-            6->{mapPlayer = map1.createMap(nivel)
-
-                player.moveRight(nivel,mapPlayer)
-            }
-
-            else -> println("MOVIMIENTO INVALIDO!!")
-        }
-
-        // Evaluamos la colisión del jugador con los enemígos
-        for (y in 0..nivel){
-            for (x in 0..nivel){
-                if (mapPlayer[y][x].equals("[x]") && mapEnemy[y][x].equals("[0]")){
-                    println("IMPACTO, pierdes una vida")
-                    player.vidas -= 1
-                    player.puntaje -= 100
-                    impacto += 1
-                }
-            }
-        }
-
-        // evaluamos si el jugador llega a la meta
-        if (mapPlayer[nivel-1][nivel-1] == "[x]"){
-            nivel +=1
-            player.puntaje +=100
-            avanza +=1
-        }
-
-        // si llega a la meta y avanza de nivel se crea el siguiente escenario y se reinician los parametros
-        if (avanza == 1){
-            enemy.numEnemys = 0
-            mapPlayer = map1.createMap(nivel)
-            mapEnemy = map2.createMap(nivel)
-
-            mapPlayer[0][0] = "[x]"
-            player.posY = 0
-            player.posX = 0
-
-            avanza -=1
-
-            do {
-                numEnemy = enemy.randomEnemy(nivel,mapEnemy)
-            }while (numEnemy<nivel-2)
-        }
-
-        // Si hay colisión se reinicia la posición del jugador y se crean nuevamente enemígos aleatorios
-        if (impacto == 1){
-            enemy.numEnemys = 0
-
-            mapPlayer = map1.createMap(nivel)
-            mapEnemy = map2.createMap(nivel)
-
-            do {
-                numEnemy = enemy.randomEnemy(nivel,mapEnemy)
-            }while (numEnemy<nivel-2)
-
-            mapPlayer[0][0] = "[x]"
-            player.posY = 0
-            player.posX = 0
-
-            impacto -=1
-
-        }
-
-        if (nivel > 9){
-            println("ERES GENIAL, PASASTE TODOS LOS NIVELES!!!")
-            System.exit(0)
-        }
-
-    }while (player.vidas>0)
-
-    println("Te quedaste sin vidas...FIN DEL JUEGO!!")
-
+fun main() {
+    var x : Double = 20.0
+    x = MyBestSin(x) + MyBestCos(x) * Revers(x)
 }
