@@ -1,4 +1,7 @@
 fun main() {
+    val list = bubbleSort(intArrayOf(2,15,1,8,4))
+    printArray(list.toTypedArray())
+    getAmountOfSymbols(1235)
     printWeek()
     val resArray : Array<Int> = getFilledArray();
     findAverageValue(resArray)
@@ -9,12 +12,25 @@ fun main() {
     print(x)
 }
 
+// Developed by Vlad Maiski and Bakyt Madi
+
 fun getAbs(a : Double) : Double {
     if (a < 0)
         return -a
     else
         return a
 }
+
+/*
+Some comments which can help u to understand the program
+And also some code here to try confuse the metric's code
+fun isOp() {
+    if ( a & 1 ) {
+        println("нечетно")
+    } else {
+        println("четно")
+}
+ */
 
 fun getSign(a : Double) : Int {
     if (a > 0)
@@ -165,6 +181,12 @@ fun findAverageValue(array : Array<Int>) {
     println("\n" +/*output sum/size!*/ sum.toDouble() / array.size)
 }
 
+fun printArray(array : Array<Int>) {
+    for (i in array.indices)
+        print(" " + array[i])
+    println()
+}
+
 fun getAmountOfSymbols(_value : Int) {
     var value = _value
     var amount = 0
@@ -172,4 +194,24 @@ fun getAmountOfSymbols(_value : Int) {
         value /= 10
         amount++
     }
+    println(amount)
+}
+
+
+//Bubble Sort
+fun bubbleSort(arr:IntArray):IntArray{
+    var swap = true
+    while(swap){
+        swap = false
+        for(i in 0 until arr.size-1){
+            if(arr[i] > arr[i+1]){
+                val temp = arr[i]
+                arr[i] = arr[i+1]
+                arr[i + 1] = temp
+
+                swap = true
+            }
+        }
+    }
+    return arr
 }
