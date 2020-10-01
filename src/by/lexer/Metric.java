@@ -16,7 +16,7 @@ public class Metric {
 	private int n;
 	private int v;
 	public Metric(ArrayList<ArgumentToken> argTokens) {
-		this.argTokens = argTokens;
+		this.argTokens = new ArrayList<ArgumentToken>(argTokens);
 		argOperators = new ArrayList<Argument>();
 		argOperands = new ArrayList<Argument>();
 		countMetrics();
