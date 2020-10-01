@@ -2,13 +2,16 @@ package by.lexer;
 
 import java.util.ArrayList;
 
+import by.lexer.Enums.Op;
+import by.lexer.Enums.Type;
+
 public class Parser {
 	private ArrayList<Token> tokens;
 	private ArrayList<ArgumentToken> args;
 	private int currentIndex = 0;
 	public Parser(ArrayList<Token> tokens) {
 		args = new ArrayList<ArgumentToken>();
-		this.tokens = tokens;
+		this.tokens = new ArrayList<Token>(tokens);
 		parse();
 	}
 	

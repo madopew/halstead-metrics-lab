@@ -1,5 +1,7 @@
 package by.lexer;
 
+import by.lexer.Enums.Op;
+
 public class ArgumentToken {
 	public Op op;
 	public String value;

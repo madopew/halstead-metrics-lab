@@ -1,4 +1,4 @@
-package by.lexer;
+package by.lexer.Enums;
 
 public enum Type {
 	PUNC, // ( ) { } ;

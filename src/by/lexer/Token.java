@@ -1,5 +1,7 @@
 package by.lexer;
 
+import by.lexer.Enums.Type;
+
 public class Token {
 	public Type type;
 	public String value;

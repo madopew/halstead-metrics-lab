@@ -2,6 +2,8 @@ package by.lexer;
 
 import java.util.ArrayList;
 
+import by.lexer.Enums.Op;
+
 public class Metric {
 	private ArrayList<ArgumentToken> argTokens;
 	private ArrayList<Argument> argOperators;

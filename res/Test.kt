@@ -1,6 +1,9 @@
 fun main() {
+
+    var index = 0
+
     do {
-        index++
+        println(index++)
     } while (index<3)
 
     if(x != 6)

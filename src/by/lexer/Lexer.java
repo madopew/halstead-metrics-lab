@@ -2,6 +2,8 @@ package by.lexer;
 
 import java.util.ArrayList;
 
+import by.lexer.Enums.Type;
+
 public class Lexer {
 	private ArrayList<Token> tokens;
 	private char[] inputStream;
