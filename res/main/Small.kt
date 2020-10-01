@@ -5,7 +5,7 @@ fun main() {
     for(i in 3..50) {
         val tmp = l
         l += r
-        r = temp
+        r = tmp
     }
     
     if(l > 1000)
