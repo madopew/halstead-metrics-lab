@@ -1,10 +1,12 @@
 fun main() {
+    print(factorial(4))
     val list = bubbleSort(intArrayOf(2,15,1,8,4))
     printArray(list.toTypedArray())
     getAmountOfSymbols(1235)
     printWeek()
     val resArray : Array<Int> = getFilledArray();
     findAverageValue(resArray)
+    println(taylorSin(Math.PI))
     println(compare(12,13))
     println(getSign(-12.3))
     var x = 20.0
@@ -214,4 +216,31 @@ fun bubbleSort(arr:IntArray):IntArray{
         }
     }
     return arr
+}
+
+fun factorial(n: Int): Double {
+    var result = 1.0
+    for (i in 1..n) {
+        result *= i
+    }
+    return result
+}
+
+fun taylorSin(x: Double): Double {
+    var sumNeu: Double
+    var sumOld: Double
+    var sum: Double
+    var i = 1
+    sumNeu = x
+    sum = sumNeu // This should calculating the first term Value
+    do  //the loop do will calculating the Tailor Series
+    {
+        sumOld = sumNeu
+        i++
+        sum = +sum * x * x / i
+        i++
+        sum /= i
+        sumNeu = sumOld + sum
+    } while (sumNeu != sumOld)
+    return sumNeu
 }
