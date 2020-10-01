@@ -134,7 +134,7 @@ public class Controller implements Initializable {
             Lexer l = new Lexer(sb.toString());
             Parser p = new Parser(l.getTokens());
             Metric m = new Metric(p.getArgTokens());
-            System.out.println(p.toString());
+            System.out.printf("lexems:\n%s\nargs:\n%s\n", l.toString(), p.toString());
             getN1().setText(Integer.toString(m.getN1()));
             getN2().setText(Integer.toString(m.getN2()));
             getNu1().setText(Integer.toString(m.getNu1()));

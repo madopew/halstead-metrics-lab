@@ -169,11 +169,11 @@ public class Parser {
 			tokens.get(currentIndex + 1).value = '.' + tokens.get(currentIndex + 1).value;
 			return;
 		} 
-		if (tokens.get(currentIndex).value.equals(".")) {
+		/*if (tokens.get(currentIndex).value.equals(".")) {
 			args.get(args.size() - 1).value += "." +  tokens.get(currentIndex + 1).value;
 			currentIndex++;
 			return;
-		} 
+		} */
 		if (tokens.get(currentIndex).value.equals(">")) {
 			int index;
 			for(index = args.size() - 1; args.get(index).op != Op.OPERATOR; index--);
