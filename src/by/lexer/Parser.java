@@ -204,9 +204,5 @@ public class Parser {
 			args.add(new ArgumentToken(Op.OPERATOR, "[]"));
 			return;
 		}
-		if(tokens.get(currentIndex).value.equals(";")) {
-			args.add(new ArgumentToken(Op.OPERATOR, ";"));
-			return;
-		}
 	}
 }
