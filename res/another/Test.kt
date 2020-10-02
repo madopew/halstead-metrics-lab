@@ -1,8 +1,7 @@
-fun findAverageValue(array : Array<Int>) {
-
-    Integer.parseInt(num)
-
-    arr[i + ++j].toString()
-    print(toString(i).toInt())
-    println("\n" +/*output sum/size!*/ sum.toDouble() / array.size)
+fun findAverageValue(array : Array<Array<Int>>) {
+    if(x == 3)
+        println(2)
+    else if (x == 2)
+        println(3)
+        prinltn(4)  
 }

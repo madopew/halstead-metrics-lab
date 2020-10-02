@@ -176,7 +176,7 @@ public class Parser {
 		} */
 		if (tokens.get(currentIndex).value.equals(">")) {
 			int index;
-			for(index = args.size() - 1; args.get(index).op != Op.OPERATOR; index--);
+			for(index = args.size() - 1; args.get(index).op != Op.OPERATOR || args.get(index).value.equals("<>"); index--);
 			if(args.get(index).value.equals("<")) {
 				args.get(index).value = "<>";
 				return;
